@@ -54,7 +54,13 @@
   var navLinks = $$('.primary-nav ul a');
 
   (function activeSection() {
-    var sections = navLinks
+    // Only in-page (#anchor) links drive the active state; external links
+    // like the 3D Designer page are skipped.
+    var hashLinks = navLinks.filter(function (a) {
+      var h = a.getAttribute('href') || '';
+      return h.charAt(0) === '#' && h.length > 1;
+    });
+    var sections = hashLinks
       .map(function (a) { return $(a.getAttribute('href')); })
       .filter(Boolean);
     if (!sections.length || !('IntersectionObserver' in window)) return;

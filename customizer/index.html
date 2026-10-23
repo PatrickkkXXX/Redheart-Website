@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3D Product Customizer — Redheart Glass &amp; Aluminum Supply</title>
+<meta name="description" content="Design your aluminium window, glass panel, mirror or cabinet in real-time 3D — choose frame colours, glass types, finishes and dimensions, then request a quotation.">
+<meta name="theme-color" content="#14161a">
+<link rel="icon" href="../img/logo-icon.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/customizer.css">
+
+<!-- Three.js is vendored locally (no CDN / network dependency at runtime). -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three/three.module.js",
+    "three/addons/": "./vendor/three/addons/"
+  }
+}
+</script>
+</head>
+<body>
+
+<header class="cz-header">
+  <a class="cz-back" href="../index.html" aria-label="Back to Redheart home">
+    <img src="../img/logo.png" alt="" width="34" height="34">
+    <span class="cz-back-text"><strong>Redheart</strong> Customizer</span>
+  </a>
+  <p class="cz-tagline">3D Window, Glass, Mirror &amp; Cabinet Configurator</p>
+  <a class="cz-header-cta" href="#cz-right">Get a quote</a>
+</header>
+
+<div class="cz-app" id="cz-app">
+
+  <!-- LEFT: configuration -->
+  <aside class="cz-panel cz-panel-left" id="cz-left" aria-label="Configuration options"></aside>
+
+  <!-- CENTER: 3D stage -->
+  <section class="cz-stage" id="cz-stage" aria-label="3D preview">
+    <div class="cz-viewer" id="cz-viewer"></div>
+
+    <div class="cz-loading" id="cz-loading">
+      <div class="cz-spinner" aria-hidden="true"></div>
+      <p>Loading 3D model…</p>
+    </div>
+
+    <div class="cz-toolbar" role="toolbar" aria-label="Viewer controls">
+      <div class="cz-tool-group" aria-label="Camera views">
+        <button class="cz-tool" type="button" data-view="front">Front</button>
+        <button class="cz-tool" type="button" data-view="side">Side</button>
+        <button class="cz-tool" type="button" data-view="top">Top</button>
+        <button class="cz-tool" type="button" data-view="perspective">3D</button>
+      </div>
+      <div class="cz-tool-group">
+        <button class="cz-tool" type="button" data-action="reset-cam" title="Reset camera">Reset</button>
+        <button class="cz-tool" type="button" data-action="explode" aria-pressed="false" title="Exploded view">Exploded</button>
+        <button class="cz-tool is-active" type="button" data-action="guides" title="Toggle dimension guides">Guides</button>
+        <button class="cz-tool" type="button" data-action="fullscreen" title="Full screen">Full&nbsp;screen</button>
+      </div>
+      <div class="cz-tool-group" aria-label="Background">
+        <span class="cz-tool-label">Scene</span>
+        <button class="cz-tool is-active" type="button" data-bg="studio">Studio</button>
+        <button class="cz-tool" type="button" data-bg="light">Light</button>
+        <button class="cz-tool" type="button" data-bg="dark">Dark</button>
+      </div>
+      <div class="cz-tool-group" aria-label="Units">
+        <span class="cz-tool-label">Units</span>
+        <button class="cz-tool is-active" type="button" data-unit="mm">mm</button>
+        <button class="cz-tool" type="button" data-unit="cm">cm</button>
+        <button class="cz-tool" type="button" data-unit="in">in</button>
+      </div>
+      <div class="cz-tool-group" aria-label="Render quality">
+        <span class="cz-tool-label">Quality</span>
+        <button class="cz-tool is-active" type="button" data-quality="high">High</button>
+        <button class="cz-tool" type="button" data-quality="low">Fast</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT: summary / quote -->
+  <aside class="cz-panel cz-panel-right" id="cz-right" aria-label="Configuration summary and quotation"></aside>
+
+</div>
+
+<script type="module" src="js/main.js"></script>
+<noscript><p style="padding:24px;font-family:sans-serif">This 3D configurator needs JavaScript enabled.</p></noscript>
+</body>
+</html>
