@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://redheart-glass-and-aluminum-supply.netlify.app/sitemap.xml
