@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redheart 3D Effects - Visual Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0c10 0%, #1a1d2a 100%);
+            color: #eef0f4;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        h1 {
+            font-size: 3em;
+            color: #c0152a;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(192, 21, 42, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #d0d6e0;
+        }
+        
+        .effects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .effect-card {
+            background: linear-gradient(135deg, rgba(25,29,42,0.8) 0%, rgba(22,25,32,0.6) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: slideUp 0.8s ease;
+        }
+        
+        .effect-card:hover {
+            border-color: rgba(192, 21, 42, 0.5);
+            box-shadow: 0 0 30px rgba(192, 21, 42, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .effect-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #c0152a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(192, 21, 42, 0.4);
+        }
+        
+        .effect-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #c0152a;
+            margin-bottom: 15px;
+        }
+        
+        .effect-description {
+            color: #d0d6e0;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        
+        .effect-trigger {
+            background: rgba(192, 21, 42, 0.1);
+            border-left: 3px solid #c0152a;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #eef0f4;
+        }
+        
+        .effect-trigger strong {
+            color: #ff6b7a;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(192, 21, 42, 0.3);
+            padding: 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            color: #4ade80;
+            margin-top: 10px;
+        }
+        
+        .customization-section {
+            background: linear-gradient(135deg, rgba(192, 21, 42, 0.1) 0%, rgba(25, 29, 42, 0.8) 100%);
+            border: 2px solid rgba(192, 21, 42, 0.3);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            animation: slideUp 0.8s ease;
+        }
+        
+        .customization-section h2 {
+            font-size: 2em;
+            color: #c0152a;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .custom-option {
+            background: rgba(10, 12, 16, 0.6);
+            border-left: 4px solid #c0152a;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-option:hover {
+            background: rgba(25, 29, 42, 0.8);
+            box-shadow: 0 0 15px rgba(192, 21, 42, 0.2);
+        }
+        
+        .custom-option strong {
+            color: #ff6b7a;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .custom-option .value {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #4ade80;
+            font-size: 0.9em;
+            margin-top: 8px;
+            display: inline-block;
+        }
+        
+        .animation-demo {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #c0152a 0%, #8b0e1d 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin: 20px 0;
+            animation: demoRotate 4s linear infinite;
+            box-shadow: 0 0 30px rgba(192, 21, 42, 0.5);
+        }
+        
+        @keyframes demoRotate {
+            0% { transform: perspective(800px) rotateY(0deg) rotateX(15deg); }
+            100% { transform: perspective(800px) rotateY(360deg) rotateX(15deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .comparison-section {
+            margin-top: 50px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(10, 12, 16, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(192, 21, 42, 0.2);
+        }
+        
+        .comparison-table th {
+            background: #c0152a;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            border-bottom: 2px solid rgba(192, 21, 42, 0.5);
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(192, 21, 42, 0.1);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .value-low { color: #fbbf24; }
+        .value-high { color: #4ade80; }
+        
+        .installation-steps {
+            background: rgba(192, 21, 42, 0.15);
+            border: 2px solid #c0152a;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .installation-steps h3 {
+            color: #c0152a;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+        
+        .step-number {
+            background: #c0152a;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(192, 21, 42, 0.4);
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content strong {
+            color: #ff6b7a;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(192, 21, 42, 0.3);
+            color: #7a8396;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #c0152a;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Redheart 3D Effects</h1>
+            <p class="subtitle">Visual Guide to Interactive Cabinet Rotation Features</p>
+        </header>
+        
+        <div class="effects-grid">
+            <div class="effect-card">
+                <div class="effect-number">1</div>
+                <div class="effect-title">Auto-Rotating Cabinet</div>
+                <div class="effect-description">
+                    When users hover over gallery images, the cabinet automatically rotates 360° in 3D space with a smooth, continuous animation.
+                </div>
+                <div class="effect-trigger">
+                    <strong>Trigger:</strong> Mouse enters gallery item
+                </div>
+                <div class="code-block">rotateY(360deg) with perspective(1200px)</div>
+            </div>
+            
+            <div class="effect-card">
+                <div class="effect-number">2</div>
+                <div class="effect-title">Cursor-Tracking Rotation</div>
+                <div class="effect-description">
+                    The cabinet's rotation dynamically follows your mouse movement, creating an interactive 3D experience that responds to cursor position.
+                </div>
+                <div class="effect-trigger">
+                    <strong>Trigger:</strong> Mouse moves over image
+                </div>
+                <div class="code-block">rotateX/Y based on mouse coordinates</div>
+            </div>
+            
+            <div class="effect-card">
+                <div class="effect-number">3</div>
+                <div class="effect-title">Dynamic Glow & Brightness</div>
+                <div class="effect-description">
+                    A vibrant red glow surrounds the cabinet with enhanced brightness, making it stand out and creating a premium, luxurious feel.
+                </div>
+                <div class="effect-trigger">
+                    <strong>Trigger:</strong> Hover on gallery item
+                </div>
+                <div class="code-block">drop-shadow(0 0 30px rgba(192,21,42,0.4))</div>
+            </div>
+            
+            <div class="effect-card">
+                <div class="effect-number">4</div>
+                <div class="effect-title">Shine Reflection Layer</div>
+                <div class="effect-description">
+                    A glass-like reflection effect simulates light bouncing off the aluminum and glass surfaces, adding realism to the 3D effect.
+                </div>
+                <div class="effect-trigger">
+                    <strong>Trigger:</strong> Mouse over image
+                </div>
+                <div class="code-block">radial-gradient shine layer overlay</div>
+            </div>
+            
+            <div class="effect-card">
+                <div class="effect-number">5</div>
+                <div class="effect-title">Spring-Back Animation</div>
+                <div class="effect-description">
+                    When you move your mouse away, the cabinet smoothly bounces back to its original position with a satisfying spring-like easing.
+                </div>
+                <div class="effect-trigger">
+                    <strong>Trigger:</strong> Mouse leaves image
+                </div>
+                <div class="code-block">cubic-bezier(0.34, 1.56, 0.64, 1)</div>
+            </div>
+            
+            <div class="effect-card">
+                <div class="effect-number">6</div>
+                <div class="effect-title">Enhanced Mouse Glow Trail</div>
+                <div class="effect-description">
+                    The cursor trail effect is now more prominent with improved radial gradients and shadow effects for better visual feedback.
+                </div>
+                <div class="effect-trigger">
+                    <strong>Trigger:</strong> Mouse moves anywhere
+                </div>
+                <div class="code-block">radial-gradient + drop-shadow enhancement</div>
+            </div>
+        </div>
+        
+        <div class="customization-section">
+            <h2>🎯 Customization Options</h2>
+            
+            <div class="custom-option">
+                <strong>Rotation Intensity</strong>
+                <p>Adjust how dramatically the cabinet rotates based on cursor position.</p>
+                <div class="value">const rotX = mouseY * 30;</div>
+                <div class="value">const rotY = mouseX * 45;</div>
+                <p style="margin-top: 10px; color: #d0d6e0;">Higher numbers = more rotation. Try: 30→50 for extreme, 30→15 for subtle</p>
+            </div>
+            
+            <div class="custom-option">
+                <strong>Auto-Rotation Speed</strong>
+                <p>Control how fast the cabinet spins during auto-rotation on hover.</p>
+                <div class="value">rotY += 3;  // frames per interval</div>
+                <p style="margin-top: 10px; color: #d0d6e0;">Try: 1 (slow), 3 (default), 5 (fast), 8 (very fast)</p>
+            </div>
+            
+            <div class="custom-option">
+                <strong>Zoom Scale</strong>
+                <p>Adjust how much the cabinet zooms in when you hover.</p>
+                <div class="value">scale(1.15)  // 1.0 = no zoom, 1.5 = 50% larger</div>
+                <p style="margin-top: 10px; color: #d0d6e0;">Recommended: 1.05 (subtle), 1.15 (default), 1.25 (dramatic)</p>
+            </div>
+            
+            <div class="custom-option">
+                <strong>Glow Intensity</strong>
+                <p>Control the red glow brightness around the cabinet.</p>
+                <div class="value">rgba(192,21,42,0.4)  // last value = opacity</div>
+                <p style="margin-top: 10px; color: #d0d6e0;">Try: 0.2 (subtle), 0.4 (default), 0.8 (intense), 1.0 (maximum)</p>
+            </div>
+            
+            <div class="custom-option">
+                <strong>Animation Response Time</strong>
+                <p>How quickly the rotation responds to mouse movement.</p>
+                <div class="value">transition: transform 0.08s ease-out;</div>
+                <p style="margin-top: 10px; color: #d0d6e0;">0.05s (instant), 0.08s (default), 0.15s (smooth), 0.25s (sluggish)</p>
+            </div>
+            
+            <div class="custom-option">
+                <strong>Reset Animation Speed</strong>
+                <p>How long it takes to return to original position.</p>
+                <div class="value">transition: 'all 0.7s cubic-bezier(...)';  </div>
+                <p style="margin-top: 10px; color: #d0d6e0;">0.3s (snappy), 0.7s (default), 1.2s (graceful), 2s (slow)</p>
+            </div>
+        </div>
+        
+        <div class="animation-demo" title="This is similar to the cabinet rotation effect">
+            Cabinet Rotation
+        </div>
+        
+        <div class="customization-section">
+            <h2>📊 Effect Comparison Table</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Effect</th>
+                        <th>Duration</th>
+                        <th>Easing</th>
+                        <th>Intensity</th>
+                        <th>File Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Rotation Response</td>
+                        <td>0.08s</td>
+                        <td>ease-out</td>
+                        <td><span class="value-high">High</span></td>
+                        <td>script.js:6B</td>
+                    </tr>
+                    <tr>
+                        <td>Glow Fade</td>
+                        <td>0.3s</td>
+                        <td>linear</td>
+                        <td><span class="value-high">High</span></td>
+                        <td>style.css</td>
+                    </tr>
+                    <tr>
+                        <td>Filter Change</td>
+                        <td>0.4s</td>
+                        <td>linear</td>
+                        <td><span class="value-high">High</span></td>
+                        <td>style.css</td>
+                    </tr>
+                    <tr>
+                        <td>Reset Animation</td>
+                        <td>0.7s</td>
+                        <td>cubic-bezier</td>
+                        <td><span class="value-high">Very High</span></td>
+                        <td>script.js:6B</td>
+                    </tr>
+                    <tr>
+                        <td>Scale Zoom</td>
+                        <td>0.08s</td>
+                        <td>ease-out</td>
+                        <td><span class="value-high">Medium</span></td>
+                        <td>script.js:6B</td>
+                    </tr>
+                    <tr>
+                        <td>Shine Effect</td>
+                        <td>0.3s</td>
+                        <td>linear</td>
+                        <td><span class="value-low">Low</span></td>
+                        <td>script.js:6C</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="installation-steps">
+            <h3>🚀 Installation Steps</h3>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <strong>Backup Current Files</strong>
+                    Save copies of your current script.js and style.css before replacing them.
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <strong>Upload New Files</strong>
+                    Upload the updated script.js and style.css to your web server, replacing the old versions.
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <strong>Clear Browser Cache</strong>
+                    Hard refresh your browser (Ctrl+Shift+R or Cmd+Shift+R) to clear cached files.
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <strong>Test the Effects</strong>
+                    Hover over gallery images to see the 3D cabinet rotation in action!
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <strong>Customize as Needed</strong>
+                    Open the files in a text editor and adjust the values above to match your preferences.
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: rgba(192,21,42,0.15); border-left: 4px solid #c0152a; padding: 20px; border-radius: 8px; margin: 40px 0;">
+            <h3 style="color: #c0152a; margin-bottom: 10px;">📌 Important Notes</h3>
+            <ul style="margin-left: 20px; color: #d0d6e0;">
+                <li>These effects work on all modern browsers (Chrome, Firefox, Safari, Edge)</li>
+                <li>Mobile users will see the auto-rotation effect (hover triggered by touch)</li>
+                <li>No external libraries required - pure JavaScript and CSS</li>
+                <li>Effects use GPU acceleration for smooth 60 FPS performance</li>
+                <li>Gracefully degrades in older browsers (still functional)</li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p>Redheart Glass & Aluminum — Premium 3D Interactive Effects</p>
+            <p style="margin-top: 10px;">For detailed information, see: 3D_EFFECTS_GUIDE.md</p>
+        </footer>
+    </div>
+</body>
+</html>

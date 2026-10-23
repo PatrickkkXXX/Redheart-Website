@@ -1,0 +1,152 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    REDHEART 3D CABINET EFFECTS — QUICK REFERENCE             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+🎬 3D ROTATING CABINET EFFECTS ADDED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ EFFECT #1: AUTO-ROTATING 3D CABINET
+   └─ When: User hovers over gallery images
+   └─ What: Cabinet rotates 360° smoothly in 3D space
+   └─ How: Continuous Y-axis rotation with perspective
+   └─ File: script.js, Section 6B
+
+✨ EFFECT #2: CURSOR-TRACKING ROTATION  
+   └─ When: Mouse moves over the image
+   └─ What: Rotation follows cursor position (X and Y)
+   └─ How: Maps mouse coordinates to rotateX/rotateY angles
+   └─ File: script.js, Section 6B
+
+✨ EFFECT #3: DYNAMIC GLOW & BRIGHTNESS
+   └─ When: Hovering over cabinet
+   └─ What: Red glow aura + increased brightness (1.15x)
+   └─ How: drop-shadow(0 0 30px) + filter brightness
+   └─ File: script.js + style.css
+
+✨ EFFECT #4: SHINE REFLECTION LAYER
+   └─ When: Mouse over image
+   └─ What: Glass-like reflection effect
+   └─ How: Radial gradient shine layer
+   └─ File: script.js, Section 6C + style.css
+
+✨ EFFECT #5: SPRING-BACK ANIMATION
+   └─ When: Mouse leaves image
+   └─ What: Cabinet smoothly resets to original position
+   └─ How: cubic-bezier(0.34, 1.56, 0.64, 1) easing
+   └─ File: script.js, Section 6B
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                          CUSTOMIZATION POINTS                                ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+🎯 ROTATION INTENSITY
+   File: script.js, Section 6B
+   Look for: const rotX = mouseY * 30;
+             const rotY = mouseX * 45;
+             const tiltZ = mouseX * 10;
+   Change these numbers to adjust intensity
+
+🎯 AUTO-ROTATION SPEED
+   File: script.js, Section 6B
+   Look for: rotY += 3;
+   Change to: rotY += 5; (faster) or rotY += 1; (slower)
+
+🎯 ZOOM SCALE
+   File: script.js, Section 6B
+   Look for: scale(1.15)
+   Change to: scale(1.20) for more zoom, scale(1.05) for less
+
+🎯 GLOW COLOR
+   File: style.css
+   Look for: rgba(192,21,42,0.X)
+   This is your Redheart red - adjust the last number (opacity)
+   Examples: rgba(192,21,42,0.4) = less glow
+            rgba(192,21,42,0.8) = more glow
+
+🎯 ANIMATION SPEED
+   File: style.css or script.js
+   0.08s = very fast response
+   0.7s = slow return animation
+   Adjust these time values as needed
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                          FILES TO UPLOAD                                     ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+1. script.js ✓ UPDATED
+   - Section 6B: Advanced 3D cabinet rotation
+   - Section 6C: Shine effect layer
+   
+2. style.css ✓ UPDATED
+   - Gallery item 3D perspective
+   - Enhanced glow and shadow effects
+   - New animations: cabinetSpin, glowPulse
+   - Improved mouse-glow trail
+   
+3. index.html ✓ NO CHANGES NEEDED
+   (Uses existing HTML structure)
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                       HOW TO USE ON YOUR WEBSITE                             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+STEP 1: Replace Files
+   ✓ Upload new script.js to your server
+   ✓ Upload new style.css to your server
+   ✓ Keep index.html as-is (no changes needed)
+
+STEP 2: Test in Browser
+   ✓ Go to your website
+   ✓ Hover over any product/cabinet image in the gallery
+   ✓ Watch the 3D rotation magic happen!
+   ✓ Move your mouse around - rotation follows cursor
+
+STEP 3: Adjust to Your Preference
+   ✓ Open script.js in a text editor
+   ✓ Find the customization points above
+   ✓ Tweak values and reload browser
+   ✓ Find the perfect balance!
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                          BROWSER SUPPORT                                     ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+✅ Chrome 36+         (Full support)
+✅ Firefox 16+        (Full support)
+✅ Safari 9+          (Full support)
+✅ Edge 12+           (Full support)
+✅ Mobile browsers    (Touch-hover simulation works)
+⚠️  IE 11             (No 3D support, basic fallback)
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                       PERFORMANCE & OPTIMIZATION                             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+GPU Acceleration: ✓ Enabled (will-change: transform)
+Frame Rate: 60 FPS (using requestAnimationFrame)
+Memory: Minimal (no external libraries needed)
+Network: No new assets loaded
+Mobile: Optimized (auto-rotation still works smoothly)
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                            KEY FEATURES                                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+🎁 NO DEPENDENCIES - Pure JavaScript & CSS (no jQuery, Three.js, etc.)
+🎁 SMOOTH 60 FPS - requestAnimationFrame for buttery animation
+🎁 RESPONSIVE - Works on desktop and mobile
+🎁 ACCESSIBLE - Graceful degradation in older browsers
+🎁 CUSTOMIZABLE - Easy to tweak all parameters
+🎁 PROFESSIONAL - Impresses clients with premium feel
+🎁 PERFORMANT - Minimal CPU/GPU usage
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              NEED HELP?                                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+1. Read the full guide: 3D_EFFECTS_GUIDE.md
+2. Check the code comments in script.js (Section 6B & 6C)
+3. Adjust values gradually to find your preferred look
+4. Test in browser DevTools to see live changes
+
+Enjoy your premium 3D interactive cabinets! 🚀
