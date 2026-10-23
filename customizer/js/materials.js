@@ -65,31 +65,33 @@ export function buildPanelMaterial(cfg) {
 }
 
 export function buildGlassMaterial(cfg) {
+  // Clean, reflective architectural glass — reads as glass on every device
+  // and never renders black (no transmission pass to fail or go dark).
   const g = glassDef(cfg.glass) || glassDef('clear');
   const tint = new THREE.Color(g.tint);
-  const hq = cfg.quality !== 'low';
 
   if (g.kind === 'reflective') {
-    const mat = new THREE.MeshPhysicalMaterial({
-      color: tint, metalness: 0.9, roughness: g.roughness,
-      transparent: true, opacity: hq ? 0.8 : g.opacityFallback,
-      envMapIntensity: 1.6, side: THREE.DoubleSide, name: 'glass'
+    return new THREE.MeshPhysicalMaterial({
+      color: tint, metalness: 0.85, roughness: 0.08,
+      transparent: true, opacity: 0.9, envMapIntensity: 1.9,
+      clearcoat: 1, clearcoatRoughness: 0.06,
+      side: THREE.DoubleSide, depthWrite: false, name: 'glass'
     });
-    return mat;
   }
-  if (hq) {
-    const mat = new THREE.MeshPhysicalMaterial({
-      color: tint, metalness: 0, roughness: g.roughness,
-      transmission: g.kind === 'diffuse' ? 0.72 : 1.0,
-      thickness: 0.4, ior: 1.5, transparent: true, opacity: 1,
-      attenuationColor: tint, attenuationDistance: g.kind === 'diffuse' ? 0.3 : 1.4,
-      envMapIntensity: 1.0, side: THREE.DoubleSide, name: 'glass'
+  if (g.kind === 'diffuse') { // frosted
+    return new THREE.MeshPhysicalMaterial({
+      color: tint, metalness: 0, roughness: 0.85,
+      transparent: true, opacity: 0.88, envMapIntensity: 0.7,
+      side: THREE.DoubleSide, depthWrite: false, name: 'glass'
     });
-    return mat;
   }
+  // Clear & tinted: light, glossy, strongly reflective so it looks like glass.
+  const op = Math.min(0.26 + g.opacityFallback * 0.75, 0.68);
   return new THREE.MeshPhysicalMaterial({
-    color: tint, metalness: 0, roughness: g.roughness,
-    transparent: true, opacity: g.opacityFallback,
-    envMapIntensity: 0.8, side: THREE.DoubleSide, name: 'glass'
+    color: tint, metalness: 0, roughness: 0.05,
+    transparent: true, opacity: op,
+    ior: 1.5, clearcoat: 1, clearcoatRoughness: 0.05,
+    specularIntensity: 1, envMapIntensity: 1.7,
+    side: THREE.DoubleSide, depthWrite: false, name: 'glass'
   });
 }

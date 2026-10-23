@@ -46,31 +46,31 @@ export const STYLES = [
 /* ---------- Aluminium frame colours ----------
    Finish is baked in per colour (no separate finish control).
    finish ∈ matte | glossy | brushed | metallic ; wood uses a texture. */
+/* Aluminium colours commonly used in the Philippines (powder-coat / anodised). */
 export const FRAME_COLORS = [
-  { id: 'matte-black',  name: 'Matte black',       color: '#1a1b1d', swatch: '#232428', finish: 'matte' },
-  { id: 'glossy-black', name: 'Glossy black',      color: '#0e0f11', swatch: '#111214', finish: 'glossy' },
-  { id: 'white',        name: 'White',             color: '#eceef0', swatch: '#eceef0', finish: 'matte' },
-  { id: 'silver',       name: 'Silver',            color: '#c7ccd2', swatch: '#c7ccd2', finish: 'metallic' },
-  { id: 'natural',      name: 'Natural aluminium', color: '#b8bcc2', swatch: '#b8bcc2', finish: 'brushed' },
-  { id: 'champagne',    name: 'Champagne',         color: '#d8c7a4', swatch: '#d8c7a4', finish: 'metallic' },
-  { id: 'bronze',       name: 'Bronze',            color: '#8c6a43', swatch: '#8c6a43', finish: 'metallic' },
-  { id: 'dark-bronze',  name: 'Dark bronze',       color: '#43342576', swatch: '#4a3a2a', finish: 'metallic', colorHex: '#433425' },
-  { id: 'gold',         name: 'Gold',              color: '#c9a44c', swatch: '#c9a44c', finish: 'metallic' },
-  { id: 'wood-grain',   name: 'Wood-grain',        color: '#7a4e28', swatch: '#7a4e28', finish: 'matte', wood: true },
-  { id: 'custom',       name: 'Custom colour',     color: '#a51226', swatch: 'picker',  finish: 'glossy', custom: true }
+  { id: 'white',       name: 'White',          color: '#eceef0', swatch: '#eceef0', finish: 'matte' },
+  { id: 'black',       name: 'Black',          color: '#1a1b1d', swatch: '#232428', finish: 'matte' },
+  { id: 'brown',       name: 'Brown (coffee)', color: '#5a4433', swatch: '#5a4433', finish: 'matte' },
+  { id: 'bronze',      name: 'Bronze',         color: '#8c6a43', swatch: '#8c6a43', finish: 'metallic' },
+  { id: 'dark-bronze', name: 'Dark bronze',    color: '#433425', swatch: '#433425', finish: 'metallic' },
+  { id: 'grey',        name: 'Grey',           color: '#6e7276', swatch: '#6e7276', finish: 'matte' },
+  { id: 'natural',     name: 'Natural (mill)', color: '#b8bcc2', swatch: '#b8bcc2', finish: 'brushed' },
+  { id: 'wood',        name: 'Wood-grain',     color: '#7a4e28', swatch: '#7a4e28', finish: 'matte', wood: true }
 ];
 
 /* ---------- Glass ----------
-   Visually distinct options only. kind: transparent | diffuse | reflective. */
+   Types commonly used in PH windows, doors and cabinets.
+   kind: transparent | diffuse | reflective. */
 export const GLASS = [
-  { id: 'clear',       name: 'Clear',          kind: 'transparent', tint: '#ffffff', roughness: 0.02, opacityFallback: 0.14 },
-  { id: 'tint-lgray',  name: 'Light grey',     kind: 'transparent', tint: '#c3c6c9', roughness: 0.03, opacityFallback: 0.32 },
-  { id: 'tint-dgray',  name: 'Dark grey',      kind: 'transparent', tint: '#6d7175', roughness: 0.03, opacityFallback: 0.5 },
-  { id: 'tint-bronze', name: 'Bronze',         kind: 'transparent', tint: '#9c7b4e', roughness: 0.03, opacityFallback: 0.42 },
-  { id: 'tint-blue',   name: 'Blue',           kind: 'transparent', tint: '#8fb4c9', roughness: 0.03, opacityFallback: 0.36 },
-  { id: 'tint-green',  name: 'Green',          kind: 'transparent', tint: '#9ec3a7', roughness: 0.03, opacityFallback: 0.36 },
-  { id: 'frosted',     name: 'Frosted',        kind: 'diffuse',     tint: '#eef1f3', roughness: 0.9,  opacityFallback: 0.82 },
-  { id: 'reflective',  name: 'Reflective',     kind: 'reflective',  tint: '#8aa0ad', roughness: 0.05, opacityFallback: 0.55 }
+  { id: 'clear',      name: 'Clear',           kind: 'transparent', tint: '#eaf1f5', opacityFallback: 0.14 },
+  { id: 'bronze',     name: 'Bronze tint',     kind: 'transparent', tint: '#9c7b4e', opacityFallback: 0.42 },
+  { id: 'grey',       name: 'Grey tint',       kind: 'transparent', tint: '#6d7175', opacityFallback: 0.5 },
+  { id: 'blue',       name: 'Blue tint',       kind: 'transparent', tint: '#8fb4c9', opacityFallback: 0.36 },
+  { id: 'green',      name: 'Green tint',      kind: 'transparent', tint: '#9ec3a7', opacityFallback: 0.36 },
+  { id: 'refl-blue',  name: 'Reflective blue', kind: 'reflective',  tint: '#6f9cc4' },
+  { id: 'refl-green', name: 'Reflective green',kind: 'reflective',  tint: '#79b495' },
+  { id: 'refl-grey',  name: 'Reflective grey', kind: 'reflective',  tint: '#9aa6ad' },
+  { id: 'frosted',    name: 'Frosted',         kind: 'diffuse',     tint: '#eef1f3', opacityFallback: 0.82 }
 ];
 
 export const BACKGROUNDS = [
@@ -81,7 +81,7 @@ export const BACKGROUNDS = [
 
 export const DEFAULT_CONFIG = {
   style: 'win-2',
-  frameColor: 'matte-black',
+  frameColor: 'black',
   customColor: '#a51226',
   glass: 'clear',
   background: 'studio',
