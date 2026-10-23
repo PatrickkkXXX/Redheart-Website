@@ -20,56 +20,56 @@ sitemap.xml
 
 ## 3D Product Customizer
 
-`customizer/` is a self-contained, real-time 3D configurator for aluminium
-windows, glass, mirrors and (on the roadmap) cabinets. It is plain ES-module
-JavaScript with **Three.js vendored locally** — no build step and no runtime CDN
-dependency, so it deploys on Netlify like the rest of the site and works offline.
+`customizer/` is a self-contained, real-time 3D configurator (Coohom-style). It is
+deliberately simple — the customer changes only three things:
 
-Open it at `/customizer/`. It is linked from the main navigation ("3D Designer")
-and a promo band on the home page.
+1. **Product** — window, door or cabinet, each with style/panel variants
+   (2/3/4/6-panel sliding, casement, awning, butterfly, French, swing, display
+   cabinets, etc.).
+2. **Aluminium colour** — 10 finishes plus a custom colour picker.
+3. **Glass** — clear, tints, frosted, reflective.
+
+No measurements, pricing or clutter. The viewer has smooth orbit with gentle
+auto-spin, front/side/top/3D views, light/studio/dark scenes, reset and full
+screen. Customers can save, share a link, export a preview image, and request a
+quote via Messenger with the design attached.
+
+It is plain ES-module JavaScript with **Three.js vendored locally** — no build
+step and no runtime CDN dependency, so it deploys on Netlify like the rest of the
+site and works offline. Open it at `/customizer/`; it is linked from the main
+navigation ("3D Designer") and a promo band on the home page.
 
 ```
 customizer/
   index.html              Layout: left config · centre 3D stage · right summary
   css/customizer.css
   js/
-    config.js             Catalogs: products, colours, finishes, glass, mirrors,
-                          dimension rules, accessories, PRICING rules
-    state.js              Config store — single source of truth, validation,
-                          URL (?c=) + localStorage save/restore
-    materials.js          PBR frame / glass / mirror materials (+ low-qual path)
-    pricing.js            Itemised estimate calculator
+    config.js             Catalogs: CATEGORIES, STYLES, FRAME_COLORS, GLASS
+    state.js              Config store — single source of truth, URL (?c=) +
+                          localStorage save/restore
+    materials.js          PBR frame / glass materials (+ low-quality fallback)
     geometry/
-      index.js            Builder registry (new product builders slot in here)
-      sliding.js          Parametric sliding / fixed window + sliding door
-    scene.js              Renderer, lighting, OrbitControls, views, exploded
-                          view, dimension guides, mirror reflections, PNG export
+      index.js            Builder registry (new builders slot in here)
+      opening.js          Parametric windows & doors (sliding/casement/awning/
+                          butterfly/French/swing/fixed)
+      cabinet.js          Parametric glass cabinets (hinged / sliding doors)
+    scene.js              Renderer, lighting, OrbitControls, auto-spin, views,
+                          smooth model swap, PNG export
     ui.js                 Builds the control panels + summary from the catalogs
     main.js               Wiring
-  vendor/three/           Three.js r160 (module + OrbitControls, RoomEnvironment,
-                          CSS2DRenderer, Reflector) — vendored, no CDN
+  vendor/three/           Three.js r160 (module + OrbitControls, RoomEnvironment)
+                          — vendored locally, no CDN
 ```
-
-### What works today
-Fully interactive 3D sliding window (plus fixed window and sliding door, which
-share the builder): 360° orbit / zoom / pan, front·side·top·3D views, reset,
-exploded view, full screen, light/dark/studio backgrounds. Independent frame
-colour + finish, all glass types (real transmission) and mirrors (real planar
-reflection), live dimensions with on-model guides (mm/cm/in), panel count,
-accessories, an itemised **estimate**, save / shareable link / image export /
-spec sheet, A/B comparison, and a Messenger quotation with the full spec.
 
 ### Change things without touching 3D code
 | Want to change | Edit |
 | --- | --- |
-| Colours, glass, mirrors, accessories | `customizer/js/config.js` (catalog arrays) |
-| **Prices** (placeholder estimates) | `customizer/js/config.js` → `PRICING` |
-| Dimension limits / presets | `customizer/js/config.js` → `DIMENSIONS`, `SIZE_PRESETS` |
-| Messenger handle | `customizer/js/main.js` → `MESSENGER` |
+| Colours & glass options | `customizer/js/config.js` (`FRAME_COLORS`, `GLASS`) |
+| Products / styles / panel counts | `customizer/js/config.js` (`STYLES`) |
+| Messenger handle | `customizer/js/main.js` (`MESSENGER`) |
 
-Pricing figures are **placeholder estimates** in PHP and are labelled as such in
-the UI — replace them with the business's real rates. New window designs and the
-cabinet builder register in `geometry/index.js` without rebuilding the app.
+New window/door styles are added as entries in `STYLES`; new geometry builders
+register in `customizer/js/geometry/index.js` without rebuilding the app.
 
 No build step and no dependencies. Open `index.html` in a browser, or serve the
 folder locally:

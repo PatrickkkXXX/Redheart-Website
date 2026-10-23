@@ -17,6 +17,9 @@
 (function () {
   'use strict';
 
+  // Signal that the script is running so the HTML load-fallback stays off.
+  document.documentElement.classList.add('rh-ready');
+
   var $  = function (sel, ctx) { return (ctx || document).querySelector(sel); };
   var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
 

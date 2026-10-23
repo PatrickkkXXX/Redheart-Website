@@ -8,6 +8,22 @@
 <link rel="canonical" href="https://redheart-glass-and-aluminum-supply.netlify.app/">
 <meta name="theme-color" content="#121418">
 
+<!-- Load robustness: mark that JS is present (enables entrance animations),
+     and reveal all content if the main script hasn't initialised shortly —
+     so the page is never stuck blank on a slow connection or script error. -->
+<script>
+  (function (d) {
+    d.documentElement.className += ' js';
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        if (!d.documentElement.classList.contains('rh-ready')) {
+          d.documentElement.classList.add('rh-fallback');
+        }
+      }, 1200);
+    });
+  })(document);
+</script>
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Redheart Glass &amp; Aluminum Supply">
 <meta property="og:title" content="Redheart Glass &amp; Aluminum Supply">
@@ -285,14 +301,14 @@
       <p class="eyebrow eyebrow-light">New · Interactive 3D</p>
       <h2 class="section-title" id="promo-title">Design it yourself, in 3D</h2>
       <p class="promo-text">
-        Can't picture it yet? Open our 3D customizer, choose the product, frame colour,
-        glass or mirror, finish and exact size, and watch a real-time model update as you go.
-        When it looks right, send us the precise specification for a quotation.
+        Can't picture it yet? Open our 3D customizer, pick the product — window, door or
+        cabinet — then switch the aluminium colour and glass and watch it update live in 3D.
+        When it looks right, send us the design for a quotation.
       </p>
       <ul class="promo-list">
-        <li>Rotate, zoom and inspect from any angle</li>
-        <li>Every frame colour, glass and mirror finish</li>
-        <li>Enter your own dimensions and panel count</li>
+        <li>Smoothly rotate, zoom and inspect from any angle</li>
+        <li>Every aluminium colour and glass type</li>
+        <li>Windows, doors &amp; cabinets — sliding, casement, butterfly and more</li>
         <li>Save, share a link, or export a preview image</li>
       </ul>
       <a class="btn btn-solid" href="customizer/">Open the 3D customizer <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>

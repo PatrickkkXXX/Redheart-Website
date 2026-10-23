@@ -920,6 +920,23 @@ input, select, textarea { font: inherit; color: inherit; }
 @keyframes heroMedia { from { opacity: 0; transform: scale(1.1); } to { opacity: 1; transform: scale(1); } }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+/* =============================================================
+   Load robustness — content must never depend on JS finishing.
+   ============================================================= */
+/* Hero content is visible immediately (pure-CSS entrance), never JS-gated. */
+[data-seq] { opacity: 1; }
+.hero-title .mask > span { transform: none; }
+.hero .seq-in, .hero .line-in { animation: none !important; }
+.hero-inner { animation: heroRise .6s var(--ease-out-soft) both; }
+@keyframes heroRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* Scroll reveals are hidden only while JS is active and ready to animate them.
+   No JS, or JS failed to start → everything is shown. */
+html:not(.js) .reveal,
+html.rh-fallback .reveal { opacity: 1 !important; transform: none !important; }
+html:not(.js) .rule,
+html.rh-fallback .rule { transform: scaleX(1) !important; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

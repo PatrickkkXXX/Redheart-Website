@@ -121,6 +121,16 @@ button { font:inherit; cursor:pointer; }
 .cz-tab { flex:1; padding:9px; font-size:.78rem; font-weight:500; color:var(--ink-2); background:transparent; border:0; border-radius:3px; }
 .cz-tab.is-active { background:var(--paper); color:var(--red); font-weight:600; box-shadow:0 1px 3px rgba(20,22,26,.12); }
 
+/* ---------- Product style grid ---------- */
+.cz-styles { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 12px; }
+.cz-style {
+  padding: 11px 10px; font-size: .8rem; font-weight: 500; text-align: center;
+  color: var(--ink-2); background: var(--paper); border: var(--th); border-radius: var(--radius);
+  transition: all .16s;
+}
+.cz-style:hover { border-color: var(--muted-2); color: var(--ink); }
+.cz-style.is-active { border-color: var(--red); color: var(--red); box-shadow: 0 0 0 1px var(--red); font-weight: 600; }
+
 /* ---------- Material cards ---------- */
 .cz-materials { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
 .cz-mat {
